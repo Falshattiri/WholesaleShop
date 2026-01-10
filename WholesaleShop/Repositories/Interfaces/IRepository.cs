@@ -2,7 +2,6 @@ namespace WholesaleShop.Repositories.Interfaces;
 
 public interface IRepository<T> where T : class
 {
-    // Use CRUD (Create - Read - Update - Delete)
     
     //Select All (Read)
     Task<IEnumerable<T>> GetAllAsync();
@@ -19,5 +18,7 @@ public interface IRepository<T> where T : class
     //Delete
     void Delete(T entity);
     
+    // Used for building queries (search, filter, reports) -
+    IQueryable<T> Query();
     
 }

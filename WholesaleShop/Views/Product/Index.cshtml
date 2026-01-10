@@ -1,8 +1,17 @@
-@model TModel
+@model IEnumerable<Product>
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-<h2>title</h2>
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.StockQty</td>
+            <td>@item.UnitPrice</td>
+        </tr>
+    }
+</table>
