@@ -11,6 +11,7 @@ public interface IProductService
     Task UpdateProductAsync(Product product);
     Task DeleteProductAsync(int id); 
     
-    Task<bool> IsStockAvailableAsync(int productId, int qty); 
-    
+    Task<bool> IsStockAvailableAsync(int productId, int qty);
+
+   
 }

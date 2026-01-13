@@ -1,6 +1,8 @@
+using WholesaleShop.Services.Interfaces;
+
 namespace WholesaleShop.Services.Implementations;
 
-public class SupplierService
+public class SupplierService : ISupplierService
 {
     
 }

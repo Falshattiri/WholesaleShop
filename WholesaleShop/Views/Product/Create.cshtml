@@ -1,0 +1,42 @@
+@model Product
+
+@{
+    ViewBag.Title = "title";
+    Layout = "_Layout";
+}
+
+<h2>Create Product</h2>
+<div asp-validation-summary="All"></div>
+
+<form asp-action="Create" method="post">
+    <div>
+        <label asp-for="Code"></label>
+        <input asp-for="Code" />
+        <span asp-validation-for="Code"></span>
+    </div>
+
+    <div>
+        <label asp-for="Name"></label>
+        <input asp-for="Name" />
+        <span asp-validation-for="Name"></span>
+    </div>
+
+    <div>
+        <label asp-for="StockQty"></label>
+        <input asp-for="StockQty" type="number" />
+    </div>
+
+    <div>
+        <label asp-for="UnitPrice"></label>
+        <input asp-for="UnitPrice" type="number" step="0.01" />
+    </div>
+
+    <div>
+        <label asp-for="CostPrice"></label>
+        <input asp-for="CostPrice" type="number" step="0.01" />
+    </div>
+
+    <button type="submit">Save</button>
+</form>
+
+

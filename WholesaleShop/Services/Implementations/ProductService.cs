@@ -16,9 +16,11 @@ public class ProductService : IProductService
     
     
     // Business rules and use cases for products (Product business logic)
-    public Task<IEnumerable<Product>> GetAllProductsAsync()
+    public async Task<IEnumerable<Product>> GetAllProductsAsync()
     {
-        return _unitOfWork.Products.GetAllAsync();
+        var products = await _unitOfWork.Products.GetAllAsync();
+        return products.Where(p => p.IsDeleted);
+        // return _unitOfWork.Products.GetAllAsync().
     }
 
     public Task<Product?> GetProductByIdAsync(int id)
@@ -38,18 +40,26 @@ public class ProductService : IProductService
 
     public async Task UpdateProductAsync(Product product)
     {
-       _unitOfWork.Products.Update(product);
+        var updatedProduct = await _unitOfWork.Products.GetByIdAsync(product.Id);
+        if (updatedProduct == null)
+            throw new Exception("Product not found");
+        
+        updatedProduct.Name = product.Name;
+        updatedProduct.UnitPrice = product.UnitPrice;
+        updatedProduct.StockQty = product.StockQty;
+        
+       // _unitOfWork.Products.Update(product);
        await _unitOfWork.SaveAsync();
        
     }
 
     public async Task DeleteProductAsync(int id)
     {
-        var prodDelete = await _unitOfWork.Products.GetByIdAsync(id);
-        if (prodDelete is null)
-            return;
-        
-        _unitOfWork.Products.Delete(prodDelete);
+        var product = await _unitOfWork.Products.GetByIdAsync(id);
+        if (product == null)
+            throw new Exception("Product not found.");
+
+        product.IsDeleted = false;   // 👈 Soft Delete
         await _unitOfWork.SaveAsync();
     }
 

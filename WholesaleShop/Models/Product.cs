@@ -23,6 +23,9 @@ public class Product
 
    // الكمية في المخزن
    public int StockQty { get; set; } = 0;
+   
+   // Soft Delete
+   public bool IsDeleted { get; set; } = true;
 
    // Relationships
    public ICollection<SalesInvoiceItem> SalesInvoiceItems { get; set; } = new List<SalesInvoiceItem>();

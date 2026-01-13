@@ -4,14 +4,56 @@
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
+<section class="">
+    <p> Product </p>
+    <div>
+        <a asp-controller="Product" asp-action="Create" asp-route-id="" class="btn btn-sm btn-primary"> Add </a>
+        <form asp-controller="Product" asp-action="Delete" asp-route-id="" method="post" style="display:inline" onsubmit="return confirm('Are you sure?');">
+            <button type="submit" class="btn btn-sm btn-info"> Filter </button>
+        </form>
+    </div>
+</section>
 
-<table>
-    @foreach (var item in Model)
-    {
+@if (Model == null || !Model.Any())
+{
+    <p>No products yet.</p>
+}
+else
+{
+ 
+    <table class="table table-bordered">
+        <thead>
         <tr>
-            <td>@item.Name</td>
-            <td>@item.StockQty</td>
-            <td>@item.UnitPrice</td>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Quantity</th>
+            <th>Price</th>
+            <th>Actions</th>
         </tr>
-    }
-</table>
+        </thead>
+
+        <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Code</td>
+                <td>@item.Name</td>
+                <td>@item.StockQty</td>
+                <td>@item.UnitPrice</td>
+                <td>
+                    <!-- زر تعديل -->
+                    <a asp-controller="Product" asp-action="Update" asp-route-id="@item.Id" class="btn btn-sm btn-warning"> Edit </a>
+                    <!-- زر حذف -->
+                    <form asp-controller="Product" asp-action="Delete" method="post" style="display:inline" onsubmit="return confirm('Delete this product?');">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@item.Id" />
+                        <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+}
+
