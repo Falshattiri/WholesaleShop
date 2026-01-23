@@ -59,7 +59,7 @@ public class ProductService : IProductService
         if (product == null)
             throw new Exception("Product not found.");
 
-        product.IsDeleted = false;   // 👈 Soft Delete
+        product.IsDeleted = false;   //  Soft Delete
         await _unitOfWork.SaveAsync();
     }
 

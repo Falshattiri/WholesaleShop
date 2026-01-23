@@ -17,7 +17,8 @@ public class CustomerController : Controller
     // GET
     public async Task<IActionResult> Index()
     {
-        return View();
+        var customers = await _customerService.GetAllCustomersAsync();
+        return View(customers);
     }
     
     // Create

@@ -22,6 +22,8 @@ public class Supplier
     [Column(TypeName = "decimal(18,2)")]
     public decimal CurrentBalance { get; set; } = 0m;
 
+    public bool IsDeleted { get; set; } = true;
+    
     // Relationships
     public ICollection<PurchaseInvoice> PurchaseInvoices { get; set; } = new List<PurchaseInvoice>();
     public ICollection<Payment> Payments { get; set; } = new List<Payment>();
