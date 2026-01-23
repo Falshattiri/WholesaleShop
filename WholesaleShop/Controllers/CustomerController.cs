@@ -21,19 +21,25 @@ public class CustomerController : Controller
         return View(customers);
     }
     
-    // Create
+     //  ----------------- Create ---------------------- //
+     
+    // Get
     [HttpGet]
     public IActionResult Create()
     {
         return View();
     }
 
+    // POST
     [HttpPost]
-    public IActionResult Create(Customer customer)
+    public async Task<IActionResult> Create(Customer customer)
     {
         if (!ModelState.IsValid)
-            return NotFound();
+            return View(customer);
         
-        return View(customer);
+        var result = await _customerService.CreateCustomerAsync(customer);
+        
+        return RedirectToAction(nameof(Index));
+        
     }
 }

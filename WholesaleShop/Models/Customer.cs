@@ -34,25 +34,6 @@ public class Customer
     public decimal CurrentBalance { get; set; } = 0m;
     
     
-    
-    [Required, MaxLength(255)]
-    [ScaffoldColumn(false)]
-    [Comment("BCrypt/PBKDF2 hash. Never store raw passwords.")]
-    [BindNever]     
-    [ValidateNever]
-    public string PasswordHash { get; set; } 
-
-    
-    [NotMapped]     // هذا المر لا يخزن في قواعد البيانات فقط عن التسجيل
-    [Required, DataType(DataType.Password), MinLength(8)]
-    public string Password { get; set; }
-    
-    
-    [NotMapped]
-    [Required, DataType(DataType.Password)]
-    [Compare(nameof(Password), ErrorMessage = "تأكيد كلمة المرور لا يطابق كلمة المرور.")]
-    public string ConfirmPassword { get; set; } 
-    
     // Soft Delete
     public bool IsDeleted { get; set; } = true;
     

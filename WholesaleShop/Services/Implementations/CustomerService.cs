@@ -39,8 +39,7 @@ public class CustomerService : ICustomerService {
         var updatedCustomer = await _unitOfWork.Customers.GetByIdAsync(customer.Id);
         if (updatedCustomer == null)
              throw new Exception("Customer not found.");
-       
-        updatedCustomer.PasswordHash = customer.PasswordHash;
+        
         updatedCustomer.Email = customer.Email;
         updatedCustomer.Name = customer.Name;
 
