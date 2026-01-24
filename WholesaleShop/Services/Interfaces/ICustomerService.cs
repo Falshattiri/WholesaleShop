@@ -8,7 +8,7 @@ public interface ICustomerService
     Task<IEnumerable<Customer>> GetAllCustomersAsync();
     
     // Get Customer By ID
-    Task<Customer?> GetCustomerAsync(int id);
+    Task<Customer?> GetCustomerByIdAsync(int id);
     
     // Create New Customer
     Task<Customer> CreateCustomerAsync(Customer customer);

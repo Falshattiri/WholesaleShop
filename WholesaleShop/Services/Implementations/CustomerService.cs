@@ -21,7 +21,7 @@ public class CustomerService : ICustomerService {
         return customer.Where(c => c.IsDeleted);
     }
 
-    public Task<Customer?> GetCustomerAsync(int id)
+    public Task<Customer?> GetCustomerByIdAsync(int id)
     {
         return _unitOfWork.Customers.GetByIdAsync(id);
     }
@@ -42,6 +42,7 @@ public class CustomerService : ICustomerService {
         
         updatedCustomer.Email = customer.Email;
         updatedCustomer.Name = customer.Name;
+        updatedCustomer.Address = customer.Address;
 
         await _unitOfWork.SaveAsync();
         

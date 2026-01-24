@@ -30,7 +30,7 @@ public class Customer
     public string? Address { get; set; }
 
     // حساب العميل (مدين/دائن)
-    [Column(TypeName = "decimal(18,2)")]
+    [Column(TypeName = "decimal(18,2)")] 
     public decimal CurrentBalance { get; set; } = 0m;
     
     

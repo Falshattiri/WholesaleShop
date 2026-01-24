@@ -72,7 +72,7 @@ public class ProductController : Controller
         }
     }
     
-    //  ----------------- Delete ---------------------- //
+    //  Delete - POST //
 
     [HttpPost]
     [ValidateAntiForgeryToken]

@@ -42,4 +42,43 @@ public class CustomerController : Controller
         return RedirectToAction(nameof(Index));
         
     }
+    
+    
+    // Update- GET
+    [HttpGet]
+    public async Task<IActionResult> Update(int id)
+    {
+        var customer = await _customerService.GetCustomerByIdAsync(id);
+        if (customer == null)
+            return NotFound();
+        
+        return View(customer);
+    }
+    
+    // Update -PSOt
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Update(Customer customer)
+    {
+        try {
+            await _customerService.UpdateCustomerAsync(customer);
+            return RedirectToAction(nameof(Index));
+        }
+        catch (Exception ex)
+        {
+            ModelState.AddModelError("", ex.Message);
+            return View(customer);
+        }
+    }
+    
+    // Delete - POST
+    [HttpPost]
+    public async Task<IActionResult> Delete(int id)
+    {
+        await _customerService.DeleteCustomerAsync(id);
+        return RedirectToAction(nameof(Index));
+    }
+    
+    
+    
 }
